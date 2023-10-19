@@ -5,6 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import FormattedPrice from "./FormattedPrice";
 import { useDispatch } from "react-redux";
 import { addToCart, addToFavorite } from "@/store/nextSlice";
+import Link from "next/link";
 
 const Products = ({ productData }: any) => {
   const dispatch = useDispatch();
@@ -26,13 +27,29 @@ const Products = ({ productData }: any) => {
             key={_id}
             className="w-full bg-white text-black p-4 border border-gray-300 rounded-lg group overflow-hidden">
             <div className="w-full h-[260px] relative">
-              <Image
-                className="w-full h-full object-cover scale-90 hover:scale-100"
-                width={300}
-                height={300}
-                src={image}
-                alt="productImage"
-              />
+              <Link
+                href={{
+                  pathname: `/${_id}`,
+                  query: {
+                    _id: _id,
+                    brand: brand,
+                    category: category,
+                    image: image,
+                    description: description,
+                    isNew: isNew,
+                    oldPrice: oldPrice,
+                    price: price,
+                    title: title,
+                  },
+                }}>
+                <Image
+                  className="w-full h-full object-cover scale-90 hover:scale-100"
+                  width={300}
+                  height={300}
+                  src={image}
+                  alt="productImage"
+                />
+              </Link>
               <div className="w-12 h-24 absolute bottom-10 right-0 border-[1px] border-gray-400 bg-white rounded-md flex flex-col translate-x-20 group-hover:translate-x-0 duration-300 transition-transform">
                 <span
                   onClick={() =>
